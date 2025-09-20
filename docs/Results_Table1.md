@@ -5,7 +5,6 @@ This script provides a strict replication of Table I from the Journal of Financi
 ***NOTE***: the Methodology is fully reproduced in the code, which replicate the methodology from the paper, yet the dataset is different, producing **different result** but **get the same conclusion**
 
 **Author:** Junhao Gao  
-**Email:** jug049@ucsd.edu  
 **Date:** 2024-09
 
 Before running, you can adjust the configuration settings at the top of the script:
