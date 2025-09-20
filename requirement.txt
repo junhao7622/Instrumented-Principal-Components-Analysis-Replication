@@ -1,0 +1,25 @@
+# ===================================================================
+# Requirements for IPCA Replication Project
+# ===================================================================
+# This file lists the exact package versions for ensuring full
+# reproducibility of the research results.
+#
+# To generate this file for your own environment, run:
+# pip freeze > requirements.txt
+# ===================================================================
+
+# Core data manipulation and numerical libraries
+numpy==1.21.6
+pandas==1.3.5
+scipy==1.7.3
+
+# Machine learning and statistical modeling
+scikit-learn==1.0.2
+
+# Performance and parallelization libraries
+joblib==1.1.0
+numba==0.55.1
+
+# Utility libraries for progress bars
+tqdm==4.62.3
+progressbar2==4.0.0
