@@ -8,7 +8,6 @@ Notes:
  - Wild residual bootstrap for Wα p-value using implementation in ipca.InstrumentedPCA.BS_Walpha
    (follows KPS Appendix B; see ipca.py for details)
 Author: Junhao Gao
-Email: jug049@ucsd.edu
 Date: 2024-09
 """
 
