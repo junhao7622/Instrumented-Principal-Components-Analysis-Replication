@@ -1,7 +1,7 @@
 # IPCA-Replication-Code
 
 ## 1. Overview
-***the theoretical highlight of IPCA is that it ingeniously transforms an economic structure—the idea that factor loadings are driven by characteristics—into a statistical regularization constraint, thereby achieving robust dimensionality reduction, variable selection, and overfitting control in the "factor zoo" environment where predictors can far outnumber observations.***
+***The theoretical highlight of IPCA is that it ingeniously transforms an economic structure—the idea that factor loadings are driven by characteristics—into a statistical regularization constraint, thereby achieving robust dimensionality reduction, variable selection, and overfitting control in the "factor zoo" environment where predictors can far outnumber observations.***
 
 ***methodological replication***This repository contains Python scripts to replicate Tables I and II from the paper 
 **"Characteristics are covariances: A unified model of risk and return"** (Kelly, Pruitt, Su, 2019, JFE). 
