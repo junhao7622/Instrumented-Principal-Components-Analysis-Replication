@@ -5,7 +5,7 @@ This script provides a strict replication of Table I from the Journal of Financi
 ***NOTE***: the Methodology is fully reproduced in the code, which replicate the methodology from the paper, yet the dataset is different, producing **different result** but **get the same conclusion**
 
 **Author:** Junhao Gao  
-**Date:** 2024-09
+**Date:** 2025-09
 
 Before running, you can adjust the configuration settings at the top of the script:
 * `BOOTSTRAP_DRAWS`: Number of bootstrap simulations for p-value calculation. A value of 1000 is recommended for robust results, while a smaller value (e.g., 100) can be used for quick tests.
