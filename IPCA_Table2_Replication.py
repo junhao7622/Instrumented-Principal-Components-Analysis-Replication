@@ -12,7 +12,6 @@ Includes:
     NOTE: this is NOT the MATLAB ALS algorithm used in the paper result
  - Optional IPCA ALS routine (strict Kronecker normal-equation version)
 Author: Junhao Gao
-Email: jug049@ucsd.edu
 Date: 2025-09
 """
 
