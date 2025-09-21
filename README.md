@@ -3,8 +3,7 @@
 ## 1. Overview
 ***The theoretical highlight of IPCA is that it ingeniously transforms an economic structure—the idea that factor loadings are driven by characteristics—into a statistical regularization constraint, thereby achieving robust dimensionality reduction, variable selection, and overfitting control in the "factor zoo" environment where predictors can far outnumber observations.***
 
-***Methodological Replication*** This repository contains Python scripts to replicate Tables I and II from the paper 
-**"Characteristics are covariances: A unified model of risk and return"** (Kelly, Pruitt, Su, 2019, JFE). 
+***Methodological Replication*** This repository contains Python scripts to replicate IPCA asset pricing tests (Table I) and the observable factor and PCA comparisons (Table II) from the paper **"Characteristics are covariances: A unified model of risk and return"** (Kelly, Pruitt, Su, 2019, JFE). 
 
 * **`IPCA_Table1_Replication.py`**: Estimates the IPCA model and tests for alpha significance ($W_{\alpha}$).
 * **`IPCA_TABLE2_Replication.py`**: Compares IPCA against alternative models (Observable Factors, PCA).
@@ -13,10 +12,11 @@
 ## 2. Prerequisites
 * **See requirement.txt**
 *  Python3.X required
+*  The replication of IPCA relies on a combination of proprietary and public datasets. Monthly stock returns are obtained from CRSP and merged with firm fundamentals from Compustat using the CRSP/Compustat Merged (CCM) link table. These data provide excess returns and approximately 36 firm characteristics that serve as instruments for factor loadings. In addition, standard benchmark factors (MKT, SMB, HML, RMW, CMA, UMD) are taken from Kenneth French’s data library for comparison and robustness checks. Due to licensing restrictions, CRSP and Compustat data are not included in this repository and must be accessed via WRDS.
 
 ## 3. How to Run
 1.  Adjust settings (e.g., `BOOTSTRAP_DRAWS`, date ranges) at the top of each script.
-2.  Data ready **See
+2.  Data ready and ipca.py file in root directory
 3.  Execute from the terminal:
     ```bash
     # To replicate Table I
