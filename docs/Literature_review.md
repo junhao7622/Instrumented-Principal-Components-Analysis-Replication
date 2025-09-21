@@ -2,16 +2,19 @@
 A central challenge in asset pricing is distinguishing between **risk-based explanations** (systematic factors) and **behavioral anomalies**. Traditional factor models such as CAPM, Fama-French 3-factor, and their extensions impose strong ex-ante assumptions on factor structures. However, the explosion of cross-sectional **characteristics-based factors** (so-called "factor zoo") has led to the need for a more **data-driven, statistically grounded** approach.
 
 ## Statistical tools
-# 1. Factor Model Layer
+***1. Factor Model Layer***
 - **Concept**: Classic linear factor models (returns = factors × loadings + residuals)  
 - **IPCA Role**: Extends traditional factor models by estimating latent factors from high-dimensional characteristics and allowing factor loadings to vary with features.
-# 2. High-Dimensional Statistics Layer
+  
+***2. High-Dimensional Statistics Layer***
 - **Concept**: Dimensionality reduction, multicollinearity, p ≫ n problems  
 - **IPCA Role**: Uses PCA to extract low-dimensional orthogonal factors from high-dimensional characteristics, mitigating collinearity and overfitting.
-# 3. Instrumental Variable / Endogeneity Correction Layer
+  
+***3. Instrumental Variable / Endogeneity Correction Layer***
 - **Concept**: IV corrects for correlation between factors and residuals  
 - **IPCA Role**: Applies instruments to adjust for potential endogeneity from characteristics, yielding more robust factor estimates.
-# 4. Prediction & Interpretation Layer
+  
+***4. Prediction & Interpretation Layer***
 - **Concept**: Trade-off between interpretability and predictive power  
 - **IPCA Role**: Produces factors that explain returns structure while serving as inputs for high-dimensional predictive models, improving both interpretability and robustness.
 
