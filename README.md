@@ -12,7 +12,7 @@
 ## 2. Prerequisites
 * **See requirement.txt**
 *  Python3.X required
-*  The replication of IPCA relies on a combination of proprietary and public datasets. Monthly stock returns are obtained from CRSP and merged with firm fundamentals from Compustat using the CRSP/Compustat Merged (CCM) link table. These data provide excess returns and approximately 36 firm characteristics that serve as instruments for factor loadings. In addition, standard benchmark factors (MKT, SMB, HML, RMW, CMA, UMD) are taken from Kenneth French’s data library for comparison and robustness checks. Due to licensing restrictions, CRSP and Compustat data are not included in this repository and must be accessed via WRDS.
+*  The replication of IPCA relies on a combination of proprietary and public datasets. Monthly stock returns are obtained from CRSP and merged with firm fundamentals from Compustat using the CRSP/Compustat Merged (CCM) link table. These data provide excess returns and approximately 36 firm characteristics that serve as instruments for factor loadings**See exactly columns mentioned in(Kelly, Pruitt, Su, 2019, JFE)**. In addition, standard benchmark factors (MKT, SMB, HML, RMW, CMA, UMD) are taken from Kenneth French’s data library for comparison and robustness checks. Due to licensing restrictions, CRSP and Compustat data are not included in this repository and must be accessed via WRDS.
 
 ## 3. How to Run
 1.  Adjust settings (e.g., `BOOTSTRAP_DRAWS`, date ranges) at the top of each script.
