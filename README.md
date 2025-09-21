@@ -3,7 +3,7 @@
 ## 1. Overview
 ***The theoretical highlight of IPCA is that it ingeniously transforms an economic structure—the idea that factor loadings are driven by characteristics—into a statistical regularization constraint, thereby achieving robust dimensionality reduction, variable selection, and overfitting control in the "factor zoo" environment where predictors can far outnumber observations.***
 
-***Methodological Replication*** This repository contains Python scripts to replicate IPCA asset pricing tests (Table I) and the observable factor and PCA comparisons (Table II) from the paper **"Characteristics are covariances: A unified model of risk and return"** (Kelly, Pruitt, Su, 2019, JFE). 
+***Verification of the performance of IPCA on different stock datasets, providing a methodological tool to replicate the IPCA asset pricing tests (Table I) and the observable factor and PCA comparisons (Table II) from "Characteristics are Covariances: A Unified Model of Risk and Return" (Kelly, Pruitt, Su, 2019, JFE)*** 
 
 * **`IPCA_Table1_Replication.py`**: Estimates the IPCA model and tests for alpha significance ($W_{\alpha}$).
 * **`IPCA_TABLE2_Replication.py`**: Compares IPCA against alternative models (Observable Factors, PCA).
