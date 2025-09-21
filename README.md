@@ -3,18 +3,21 @@
 ## 1. Overview
 ***The theoretical highlight of IPCA is that it ingeniously transforms an economic structure—the idea that factor loadings are driven by characteristics—into a statistical regularization constraint, thereby achieving robust dimensionality reduction, variable selection, and overfitting control in the "factor zoo" environment where predictors can far outnumber observations.***
 
-***methodological replication***This repository contains Python scripts to replicate Tables I and II from the paper 
+***Methodological Replication*** This repository contains Python scripts to replicate Tables I and II from the paper 
 **"Characteristics are covariances: A unified model of risk and return"** (Kelly, Pruitt, Su, 2019, JFE). 
 
 * **`IPCA_Table1_Replication.py`**: Estimates the IPCA model and tests for alpha significance ($W_{\alpha}$).
 * **`IPCA_TABLE2_Replication.py`**: Compares IPCA against alternative models (Observable Factors, PCA).
+* **`ipca.py`**: original IPCA method from third party, used for Table1 IPCA output R²（in-sample & predictive）and α for wild residual bootstrap defined in Table1 code
 
 ## 2. Prerequisites
-* **see requirement.txt** Python3.X required
+* **See requirement.txt**
+*  Python3.X required
 
 ## 3. How to Run
 1.  Adjust settings (e.g., `BOOTSTRAP_DRAWS`, date ranges) at the top of each script.
-2.  Execute from the terminal:
+2.  Data ready **See
+3.  Execute from the terminal:
     ```bash
     # To replicate Table I
     python IPCA_Table1_Replication.py
