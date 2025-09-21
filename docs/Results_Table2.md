@@ -14,9 +14,13 @@ Before running, you can adjust the configuration settings at the top of the scri
 
 ## Interpretation align with all Conclusions from Table 2 from Kelly, Pruitt, and Su (2019)
 **Factor Score (F) positively affects Return (R).**
+
 **Interaction term (F×C) is negative and significant.**
+
 **Characteristic (C) as a control has limited impact.**
+
 **Effect directions are robust across models.**
+
 **Overall conclusion supports original theory.**
 
 ## Output
