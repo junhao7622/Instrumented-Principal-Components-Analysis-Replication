@@ -12,10 +12,13 @@ Before running, you can adjust the configuration settings at the top of the scri
 * `DATA_CSV`: Path to your input data file.
 * `START_DATE` / `END_DATE`: The sample period for the analysis.
 
-## Interpretation align with all Conclusions from Table 2 from Kelly, Pruitt, and Su (2019)
+## Interpretation align with all Conclusions from Table 1 from Kelly, Pruitt, and Su (2019)
 **Total R² increases with factor number (K).**
+
 **Restricted model (Γα=0) has lower R² than unrestricted (Γα≠0).**
+
 **Predictive R² is small, sometimes negative, but improves with K.**
+
 **Wα test p-values are generally large.**
 
 ## Output
