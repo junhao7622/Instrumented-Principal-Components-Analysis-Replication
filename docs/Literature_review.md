@@ -19,7 +19,7 @@ A central challenge in asset pricing is distinguishing between **risk-based expl
 - **IPCA Role**: Produces factors that explain returns structure while serving as inputs for high-dimensional predictive models, improving both interpretability and robustness.
 
 ## IPCA Framework
-Kelly, Pruitt, and Su (2020) propose the **Instrumented Principal Component Analysis (IPCA)** as a method to estimate latent factors and their loadings directly from asset returns, using firm characteristics as instruments.
+Kelly, Pruitt, and Su (2019) propose the **Instrumented Principal Component Analysis (IPCA)** as a method to estimate latent factors and their loadings directly from asset returns, using firm characteristics as instruments.
 
 Formally, returns are modeled as:
 
