@@ -13,13 +13,14 @@ Before running, you can adjust the configuration settings at the top of the scri
 * `START_DATE` / `END_DATE`: The sample period for the analysis.
 
 ## Interpretation align with all Conclusions from Table 1 from Kelly, Pruitt, and Su (2019)
-**Total R² increases with factor number (K).**
 
-**Restricted model (Γα=0) has lower R² than unrestricted (Γα≠0).**
+**IPCA explains return variation while delivering stable positive predictive power.**
 
-**Predictive R² is small, sometimes negative, but improves with K.**
+**On individual assets, predictive ability is modest but improves as the number of latent factors increases.**
 
-**Wα test p-values are generally large.**
+**On managed portfolios, both explanatory and predictive performance are substantially stronger.**
+
+**Allowing nonzero α is critical when only one factor is used, but becomes unnecessary as factor dimensionality grows.**
 
 ## Output
 The script will print the replication results to the console in three parts, mirroring the structure of Table I in the paper:
