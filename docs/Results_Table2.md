@@ -13,15 +13,14 @@ Before running, you can adjust the configuration settings at the top of the scri
 * `ALS_MAX_ITER` / `ALS_TOL`: Parameters for the PCA ALS algorithm convergence.
 
 ## Interpretation align with all Conclusions from Table 2 from Kelly, Pruitt, and Su (2019)
-**Factor Score (F) positively affects Return (R).**
+**IPCA vs. Observable Factor Models (e.g., Fama-French 5-Factor)**:
+Parsimony and Risk Explanation: IPCA achieves a comparable ability to explain total return variation (Total R 
+2) while being vastly more parsimonious.
 
-**Interaction term (F×C) is negative and significant.**
-
-**Characteristic (C) as a control has limited impact.**
-
-**Effect directions are robust across models.**
-
-**Overall conclusion supports original theory.**
+**IPCA vs. Standard PCA**:
+PCA's Strength and Weakness: While PCA excels at explaining realized return variation (achieving the highest Total R 
+2), it completely fails to explain average returns. For individual stocks, PCA's Predictive R2
+is negative in all specifications, showing it has no explanatory power for risk compensation.
 
 ## Output
 
