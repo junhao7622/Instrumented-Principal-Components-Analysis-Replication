@@ -27,7 +27,7 @@
     ```
 
 ## 4. Key Implementation Details
-* **Table1 Panel A & B (IPCA Model):** Jointly and iteratively solves for **latent factors** and a high-dimensional **characteristic-to-loading mapping matrix $(\Gamma)$ ** across the entire asset panel using **Alternating Least Squares (ALS)**.
+* **Table1 Panel A & B (IPCA Model):** Jointly and iteratively solves for **latent factors** and a high-dimensional **characteristic-to-loading mapping matrix($\Gamma$)** across the entire asset panel using **Alternating Least Squares (ALS)**.
 
 * **Table1 Panel C (Bootstrap Test):** Implements a custom **Wild Residual Bootstrap** function (`compute_Walpha_pval`) to generate p-values for the $W_{\alpha}$ asset pricing test by simulating returns under the null hypothesis ($\Gamma_{\alpha}=0$), ensuring methodological transparency and control.
 
