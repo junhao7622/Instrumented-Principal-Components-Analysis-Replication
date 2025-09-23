@@ -6,7 +6,7 @@
 ***Verification of the performance of IPCA on different stock datasets, providing a methodological tool to replicate the IPCA asset pricing tests (Table I) and the observable factor and PCA comparisons (Table II) from "Characteristics are Covariances: A Unified Model of Risk and Return" (Kelly, Pruitt, Su, 2019, JFE)*** 
 
 * **`IPCA_Table1_Replication.py`**: Estimates the IPCA model and tests for alpha significance ($W_{\alpha}$).
-* **`IPCA_TABLE2_Replication.py`**: Compares IPCA against alternative models (Observable Factors, PCA).
+* **`IPCA_Table2_Replication.py`**: Compares IPCA against alternative models (Observable Factors, PCA).
 * **`ipca.py`**: original IPCA method from third party, used for Table1 IPCA output R²（in-sample & predictive）and α for wild residual bootstrap defined in Table1 code
 
 ## 2. Prerequisites
