@@ -12,7 +12,7 @@ This document describes each variable in the mock dataset, grouped by category.
   End-of-month date (time index).  
 
 - **eom_ret**  
-  Simple return for month *t*. ⚠️ Note: may contain **lookahead bias**, not recommended for empirical research.  
+  Simple return for month *t*. **Note**: may contain **lookahead bias**, not recommended for empirical research.  
 
 - **valid_ret**  
   Indicator for whether return is valid (0/1).  
