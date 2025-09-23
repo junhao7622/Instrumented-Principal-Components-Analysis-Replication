@@ -181,7 +181,7 @@ This document describes each variable in the mock dataset, grouped by category.
 # Notes
 1. **id** is the unique firm identifier; each asset has multiple monthly observations.  
 2. For return-based tests, use **`ret_exc_lead1m`** rather than `eom_ret` to avoid lookahead bias.  
-3. The uploaded `mock_data_extended` files are **randomly generated mock data**, only for pipeline testing.  
+3. The uploaded `mock_data.csv` files are **randomly generated mock data**, only for pipeline testing.  
    - Dates and distributions mimic real data structure.  
    - They **cannot reproduce actual Table 1 or Table 2 empirical results** (requires CRSP/Compustat).  
 4. Intended use: validate data processing and pipeline functionality, not to draw empirical asset pricing conclusions.  
