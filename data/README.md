@@ -1,4 +1,4 @@
-# Mock Data Dictionary (`subset_cols`)
+# Mock Data Dictionary (`characteristic_mapping`)
 
 This document describes each variable in the mock dataset, grouped by category.  
 
