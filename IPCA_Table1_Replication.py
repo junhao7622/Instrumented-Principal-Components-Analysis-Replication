@@ -8,7 +8,7 @@ Notes:
  - Wild residual bootstrap for Wα p-value using implementation in ipca.InstrumentedPCA.BS_Walpha
    (follows KPS Appendix B; see ipca.py for details)
 Author: Junhao Gao
-Date: 2024-09
+Date: 2025-09
 """
 
 
@@ -16,23 +16,25 @@ import pandas as pd
 import numpy as np
 import warnings
 from ipca import InstrumentedPCA
+
 # ---------------------------
 # basic settings AND change as needed
-BOOTSTRAP_DRAWS = 10 # number of bootstrap draws for Walpha p-value
-RANDOM_SEED = 12345 # for reproducibility
-np.random.seed(RANDOM_SEED) # for reproducibility
+BOOTSTRAP_DRAWS = 1000 # number of bootstrap draws for Walpha p-value
+RANDOM_SEED = 12345
+np.random.seed(RANDOM_SEED)
 warnings.filterwarnings('ignore', category=FutureWarning) # ignore pandas future warnings
 DATA_CSV = 'Common_Task_Monthly_Data.csv' # path to data
-START_DATE = "1963-07-01"
+START_DATE = "1963-07-01" #time
 END_DATE = "2014-05-31"
-
 print("Replication: KPS (2019) Table I - IPCA with Instruments")
 
 # ---------------------------
 # 1. Data Loading
 df = pd.read_csv(DATA_CSV)
+
 if 'market_equity' in df.columns:
     df['log_market_equity'] = np.log(df['market_equity'].clip(lower=1e-6))
+ 
 if 'assets' in df.columns:
     df['log_assets'] = np.log(df['assets'].clip(lower=1e-6))
 
@@ -58,8 +60,10 @@ df['eom'] = pd.to_datetime(df['eom'])
 df = df[(df['eom'] >= pd.to_datetime(START_DATE)) & (
     df['eom'] <= pd.to_datetime(END_DATE))]
 df = df.set_index(['id', 'eom'])
+
 if 'ret_exc_lead1m' not in df.columns:
     raise KeyError("ret_exc_lead1m not found in data.")
+ 
 y = df['ret_exc_lead1m']
 
 # Map paper characteristic names to dataset columns
@@ -78,7 +82,7 @@ characteristic_mapping = {
     'sga2s': 'dsale_dsga', 'spread': 'bidaskhl_21d', 'suv': 'turnover_var_126d'
 }
 
-# If some chara. not present, try compute or warn, keep what's available
+# If some chara. not present, try compute or warn, keep what available
 available_cols = [v for v in characteristic_mapping.values() if v in df.columns]
 reverse_map = {v:k for k,v in characteristic_mapping.items()}
 if len(available_cols) < len(characteristic_mapping):
@@ -133,10 +137,8 @@ def compute_Walpha_pval(ipca_unres, X_instr_unres, y_final, B=500, seed=1234):
     
     Returns
     -------
-    observed_W : float
-        Observed Wald statistic for alpha (Γα ≠ 0).
-    pval : float
-        Bootstrap p-value (0..1).
+    observed_W Observed Wald statistic for alpha (Γα ≠ 0).
+    pval Bootstrap p-value (0..1).
     """
     rng = np.random.default_rng(seed)
     # Compute observed Walpha from unrestricted fit
@@ -220,7 +222,6 @@ for k in range(1, 7):
         X=X_instr_res, y=y_final, data_type="portfolio") * 100
     pred_r2_xt_res  = ipca_res.score(
         X=X_instr_res, y=y_final, data_type="portfolio", mean_factor=True) * 100
-
     total_r2_rt_unres = ipca_unres.score(
         X=X_instr_unres, y=y_final, data_type="panel") * 100
     pred_r2_rt_unres  = ipca_unres.score(
@@ -251,7 +252,6 @@ for k in range(1, 7):
         'Walpha_obs': Walpha_obs,
         'Walpha_pval': walpha_pval * 100.0
     })
-
 
 # ---------------------------
 # 5. Organizing and Output results
