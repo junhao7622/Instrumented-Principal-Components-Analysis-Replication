@@ -2,7 +2,7 @@
 
 This script provides a replication of Table II from the Journal of Financial Economics paper, "Characteristics are covariances: A unified model of risk and return" by Kelly, Pruitt, Su (2019).
 
-***NOTE***: The Methodology is fully reproduced in the code, which replicate the methodology from the paper, yet the dataset is different, producing **different result** but **get the same conclusion**
+***NOTE***: The Methodology is fully reproduced in the code, which replicate the methodology from the paper, yet the **dataset is not original from paper's dataset and time focus is different**, producing **numerical results** but **get the same conclusion**
 
 **Author:** Junhao Gao  
 **Date:** 2025-09
