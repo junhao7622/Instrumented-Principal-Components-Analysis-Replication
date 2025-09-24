@@ -109,6 +109,7 @@ def calculate_r2(y_true, y_pred):
 def bootstrap_r2(y_true, y_pred, n_samples=BOOTSTRAP_SAMPLES):
     """
     Bootstrap R2 calculation to estimate mean R2 and its standard error.
+    Note: Have not been used in calculation but could be a back-up choice
     """
     if not USE_BOOTSTRAP:
         return calculate_r2(y_true, y_pred)
