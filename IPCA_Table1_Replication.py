@@ -240,7 +240,7 @@ for k in range(1, 7):
     # and replace with:
     # -----------------------------------
     #Walpha_obs = float(ipca_unres.Gamma[:, -1].T @ ipca_unres.Gamma[:, -1])
-    #pval = ipca_unres.BS_Walpha(ndraws=1000, n_jobs=-1)  # uses ipca.py
+    #pval = ipca_unres.BS_Walpha(ndraws=BOOTSTRAP_DRAWS, n_jobs=-1)  # uses ipca.py
     #print(f"Walpha_obs={Walpha_obs:.6g}, pval={pval:.4f}")
     # ----------------------------------- block for Walpha p-value computation
     Walpha_obs, walpha_pval = compute_Walpha_pval(
