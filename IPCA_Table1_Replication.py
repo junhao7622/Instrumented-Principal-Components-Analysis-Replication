@@ -126,7 +126,11 @@ print(f"Sample stats: N={N}, T={T}, Obs={len(y_final)}")
 def compute_Walpha_pval(ipca_unres, X_instr_unres, y_final, B=500, seed=1234):
     """
     Compute Wα p-value via wild residual bootstrap (KPS Appendix B).
-    
+    This function re-implements the logic in ipca.InstrumentedPCA.BS_Walpha
+    and logic in ipca.InstrumentedPCA.BS_Walpha is recommended for use instead.
+    See KPS Appendix B and ipca.py for details. :contentReference[oaic
+    this function is simple alternative if you want to avoid passing unsupported kwargs
+
     Parameters
     ----------
     ipca_unres : fitted InstrumentedPCA (unrestricted, intercept=True)
@@ -230,7 +234,15 @@ for k in range(1, 7):
         X=X_instr_unres, y=y_final, data_type="portfolio") * 100
     pred_r2_xt_unres  = ipca_unres.score(
         X=X_instr_unres, y=y_final, data_type="portfolio", mean_factor=True) * 100
-    # Compute Walpha and bootstrap p-value (custom implementation)
+    # Compute Walpha and bootstrap p-value
+    # Note: we implement Walpha p-value computation here to avoid unsupported kwargs
+    # Can also use ipca_unres.BS_Walpha() directly: delete the block below or comment out
+    # and replace with:
+    # -----------------------------------
+    #Walpha_obs = float(ipca_unres.Gamma[:, -1].T @ ipca_unres.Gamma[:, -1])
+    #pval = ipca_unres.BS_Walpha(ndraws=1000, n_jobs=-1)  # uses ipca.py
+    #print(f"Walpha_obs={Walpha_obs:.6g}, pval={pval:.4f}")
+    # ----------------------------------- block for Walpha p-value computation
     Walpha_obs, walpha_pval = compute_Walpha_pval(
         ipca_unres, X_instr_unres, y_final,
         B=BOOTSTRAP_DRAWS,
@@ -238,6 +250,7 @@ for k in range(1, 7):
     )
     print(
         f"  Observed Wα = {Walpha_obs:.6g}; bootstrap p-value = {walpha_pval*100:.3f}%")
+    #------------------------------------ block for Walpha p-value computation
 
     results.append({
         'K': k,
