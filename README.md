@@ -8,6 +8,8 @@
 * **`IPCA_Table1_Replication.py`**: Estimates the IPCA model and tests for alpha significance ($W_{\alpha}$).
 * **`IPCA_Table2_Replication.py`**: Compares IPCA against alternative models (Observable Factors, PCA).
 * **`ipca.py`**: original IPCA method from third party, used for Table1 IPCA output R²（in-sample & predictive）and α for wild residual bootstrap defined in Table1 code
+* **'IPCA OutofSample'**: contains two files, one is refactored core wrapper run/class of IPCA algorithm based on base code'ipca.py', which is directly used in Replicating table 567 in file **'IPCA_Table567_OutofSample.py'**.
+* **'IPCA_Table567_OutofSample.py'**: This script replicates the out-of-sample predictive performance analysis (Tables V, VI, VII) of the IPCA model from Kelly, Pruitt & Su (2019), evaluating factor models across different stock size portfolios.
 
 ## 2. Prerequisites
 * **See requirement.txt**
@@ -26,7 +28,7 @@
     python IPCA_TABLE2_Replication.py
     ```
 
-## 4. Key Implementation Details
+## 4. Key Implementation Details (please refers to docs_Literature review for more information)
 * **Table1 Panel A & B (IPCA Model):** Jointly and iteratively solves for **latent factors** and a high-dimensional **characteristic-to-loading mapping matrix($\Gamma$)** across the entire asset panel using **Alternating Least Squares (ALS)**.
 
 * **Table1 Panel C (Bootstrap Test):** Implements a custom **Wild Residual Bootstrap** function (`compute_Walpha_pval`) to generate p-values for the $W_{\alpha}$ asset pricing test by simulating returns under the null hypothesis ($\Gamma_{\alpha}=0$), ensuring methodological transparency and control.
@@ -35,7 +37,31 @@
 
 * **Table2 Panel C (Instrumented Factor Model):** Constructs a high-dimensional design matrix from the interaction of `L` firm characteristics and `K` observable factors, solving for the **instrument-to-beta mapping ($\Gamma_{\delta}$)** via a single, large-scale panel OLS regression.
 
-* **Table2 Panel D (PCA for Panel Data):** Implements a custom Principal Component Analysis via **Alternating Least Squares (ALS)** (`pca_als`) to handle missing observations (NaNs) in the high-dimensional stock return panel, a task where standard SVD-based PCA would fail.
+* **Table2 Panel D (PCA for Panel Data):** Implements a custom Principal Component Analysis via **Alternating Least Squares (ALS)** (`pca_als`) to handle missing observations (NaNs) in the high-dimensional stock return panel, a task where standard SVD-based PCA(principles component analysis) would fail.
+
+* **Table V: Out-of-Sample Predictive Performance**
+
+1. **Expanding Window + Expanding Mean Instruments**: Constructs instruments using $\bar{c}_{i,t} = \frac{1}{t-1}\sum_{\tau=1}^{t-1}c_{i,\tau}$ instead of full-sample mean, ensuring zero look-ahead bias in true out-of-sample prediction.
+
+2. **Rolling ALS Re-estimation**: Re-optimizes both Γ (characteristic-to-loading mapping) and F (latent factors) at every monthly OOS period via full Alternating Least Squares, capturing structural breaks and parameter drift.
+
+3. **R² Decomposition Framework**: Separates Total R² (overall fit) from Predictive R² (time-varying loadings $\Gamma z_{i,t}$ only), isolating pure forward-looking predictive power by removing fixed effects $\alpha_i$.
+
+**Table VI: Large vs Small Stock Performance**
+
+1. **Dual Instrument Paradigm**: Contrasts In-Sample instruments (fixed full-sample mean) vs Out-of-Sample instruments (expanding mean) on identical data splits, quantifying the performance penalty from eliminating forward-looking information.
+
+2. **Median-Split Heterogeneity Test**: Runs separate IPCA estimations on large-cap and small-cap subsamples to test whether the same K=4 latent factors generalize across different liquidity and information efficiency regimes.
+
+3. **IS-to-OOS R² Decay Metric**: Measures $\Delta R^2 = R^2_{IS} - R^2_{OOS}$ separately for each size cohort, diagnosing model overfitting and stability differences between liquid mega-caps and illiquid micro-caps.
+
+**Table VII: Cross-Sample Validation Matrix**
+
+1. **2×2 Transfer Learning Design**: Trains independent models on Large/Small subsamples then cross-evaluates (L-on-S, S-on-L), pioneering out-of-distribution validation in asset pricing to test parameter portability across market segments.
+
+2. **Feature Space Alignment Algorithm**: Constructs bijective mappings between instrument sets from different subsamples (e.g., `{char}_mean_rank` in Large → Small), enabling Γ_large to be applied to Z_small data despite different feature distributions.
+
+3. **Off-Diagonal Generalization Test**: High R² in L-on-S and S-on-L cells validates that factor loadings learned from one market-cap regime contain transferable pricing information for the other, supporting universal factor structure hypothesis.
 
 ## 5. Background and Results support
 * For IPCA and related background and Math implementation, could be found at docs/Literature_review and at docs/Results_Table1 or Results_Table2
