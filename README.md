@@ -8,8 +8,8 @@
 * **`IPCA_Table1_Replication.py`**: Estimates the IPCA model and tests for alpha significance ($W_{\alpha}$).
 * **`IPCA_Table2_Replication.py`**: Compares IPCA against alternative models (Observable Factors, PCA).
 * **`ipca.py`**: original IPCA method from third party, used for Table1 IPCA output R²（in-sample & predictive）and α for wild residual bootstrap defined in Table1 code
-* **'IPCA OutofSample'**: contains two files, one is refactored core wrapper run/class of IPCA algorithm based on base code'ipca.py', which is directly used in Replicating table 567 in file **'IPCA_Table567_OutofSample.py'**.
-* **'IPCA_Table567_OutofSample.py'**: This script replicates the out-of-sample predictive performance analysis (Tables V, VI, VII) of the IPCA model from Kelly, Pruitt & Su (2019), evaluating factor models across different stock size portfolios.
+* **`IPCA OutofSample`**: contains two files, one is refactored core wrapper run/class of IPCA algorithm **`refactored_Table1.py`** based on base code'ipca.py', which is directly used in Replicating table 567 in file **`IPCA_Table567_OutofSample.py`**.
+* **`IPCA_Table567_OutofSample.py`**: This script replicates the out-of-sample predictive performance analysis (Tables V, VI, VII) of the IPCA model from Kelly, Pruitt & Su (2019), evaluating factor models across different characteristics based on "stock size portfolios".
 
 ## 2. Prerequisites
 * **See requirement.txt**
@@ -29,19 +29,24 @@
     ```
 
 ## 4. Key Implementation Details (please refers to docs_Literature review for more information)
-* **Table1 Panel A & B (IPCA Model):** Jointly and iteratively solves for **latent factors** and a high-dimensional **characteristic-to-loading mapping matrix($\Gamma$)** across the entire asset panel using **Alternating Least Squares (ALS)**.
+* **Table I Panel A & B (IPCA Model):** Jointly and iteratively solves for **latent factors** and a high-dimensional **characteristic-to-loading mapping matrix($\Gamma$)** across the entire asset panel using **Alternating Least Squares (ALS)**.
 
-* **Table1 Panel C (Bootstrap Test):** Implements a custom **Wild Residual Bootstrap** function (`compute_Walpha_pval`) to generate p-values for the $W_{\alpha}$ asset pricing test by simulating returns under the null hypothesis ($\Gamma_{\alpha}=0$), ensuring methodological transparency and control.
+* **Table I Panel C (Bootstrap Test):** Implements a custom **Wild Residual Bootstrap** function (`compute_Walpha_pval`) to generate p-values for the $W_{\alpha}$ asset pricing test by simulating returns under the null hypothesis ($\Gamma_{\alpha}=0$), ensuring methodological transparency and control.
 
-* **Table2 Panel B (Static Factor Model):** Performs a large-scale estimation of static betas for the entire cross-section by executing thousands of independent **time-series OLS regressions** for each individual stock against Fama-French factors.
+* **Table II Panel B (Static Factor Model):** Performs a large-scale estimation of static betas for the entire cross-section by executing thousands of independent **time-series OLS regressions** for each individual stock against Fama-French factors.
 
-* **Table2 Panel C (Instrumented Factor Model):** Constructs a high-dimensional design matrix from the interaction of `L` firm characteristics and `K` observable factors, solving for the **instrument-to-beta mapping ($\Gamma_{\delta}$)** via a single, large-scale panel OLS regression.
+* **Table II Panel C (Instrumented Factor Model):** Constructs a high-dimensional design matrix from the interaction of `L` firm characteristics and `K` observable factors, solving for the **instrument-to-beta mapping ($\Gamma_{\delta}$)** via a single, large-scale panel OLS regression.
 
-* **Table2 Panel D (PCA for Panel Data):** Implements a custom Principal Component Analysis via **Alternating Least Squares (ALS)** (`pca_als`) to handle missing observations (NaNs) in the high-dimensional stock return panel, a task where standard SVD-based PCA(principles component analysis) would fail.
+* **Table II Panel D (PCA for Panel Data):** Implements a custom Principal Component Analysis via **Alternating Least Squares (ALS)** (`pca_als`) to handle missing observations (NaNs) in the high-dimensional stock return panel, a task where standard SVD-based PCA(principles component analysis) would fail.
 
 **Table V: Out-of-Sample Predictive Performance**
 
-1. **Expanding Window + Expanding Mean Instruments**: Constructs instruments using $\bar{c}_{i,t} = \frac{1}{t-1}\sum_{\tau=1}^{t-1}c_{i,\tau}$ instead of full-sample mean, ensuring zero look-ahead bias in true out-of-sample prediction.
+1. **Expanding Window + Expanding Mean Instruments**: Constructs instruments using expanding mean (only historical data up to t-1) instead of full-sample mean, ensuring zero look-ahead bias in true out-of-sample prediction:
+
+$$
+\bar{c}_{i,t} = \frac{1}{t-1}\sum_{\tau=1}^{t-1}c_{i,\tau}
+$$
+
 
 2. **Rolling ALS Re-estimation**: Re-optimizes both Γ (characteristic-to-loading mapping) and F (latent factors) at every monthly OOS period via full Alternating Least Squares, capturing structural breaks and parameter drift.
 
