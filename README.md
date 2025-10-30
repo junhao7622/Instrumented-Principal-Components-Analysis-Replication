@@ -39,7 +39,7 @@
 
 * **Table2 Panel D (PCA for Panel Data):** Implements a custom Principal Component Analysis via **Alternating Least Squares (ALS)** (`pca_als`) to handle missing observations (NaNs) in the high-dimensional stock return panel, a task where standard SVD-based PCA(principles component analysis) would fail.
 
-* **Table V: Out-of-Sample Predictive Performance**
+**Table V: Out-of-Sample Predictive Performance**
 
 1. **Expanding Window + Expanding Mean Instruments**: Constructs instruments using $\bar{c}_{i,t} = \frac{1}{t-1}\sum_{\tau=1}^{t-1}c_{i,\tau}$ instead of full-sample mean, ensuring zero look-ahead bias in true out-of-sample prediction.
 
