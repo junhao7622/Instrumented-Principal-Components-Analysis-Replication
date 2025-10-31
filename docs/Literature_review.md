@@ -1,4 +1,4 @@
-# Instrumented Principal Component Analysis (IPCA): A Comprehensive Statistical and Implementation Guide
+# Instrumented Principal Component Analysis (IPCA): A Comprehensive Statistical and Implementation Thought
 
 Based on: Kelly, Pruitt, and Su (2019) "Characteristics are covariances: A unified model of risk and return"
 
@@ -204,7 +204,7 @@ $$r_{i,t+1} = \alpha_i + z'_{i,t} \Gamma f_{t+1} + \varepsilon_{i,t+1}$$
 Think of the two-stage process:
 
 1. **Stage 1 (Implicit):** $\beta_{i,t} = \Gamma' z_{i,t} + \nu_{i,t}$ where $z_{i,t}$ instruments for $\beta_{i,t}$
-2. **Stage 2:** $r_{i,t+1} = \beta'_{i,t} f_{t+1} + \varepsilon_{i,t+1}$
+2. **Stage 2:** $r_{i,t+1} = \beta_{i,t}'f_{t+1} + \varepsilon_{i,t+1}$
 3. **Combined:** $r_{i,t+1} = (\Gamma' z_{i,t})' f_{t+1} + \text{residual}$
 
 ### 2.4 Comparison with Related Methods
@@ -529,9 +529,10 @@ For each characteristic $c_{i,t}$:
 $$c_{i,t} = \bar{c}_i + (c_{i,t} - \bar{c}_i) = \text{mean}_i + \text{dev}_{i,t}$$
 
 Where:
-
-- $\bar{c}_i = \frac{1}{T_i} \sum_t c_{i,t}$: Firm-specific average (persistent component)
-- $\text{dev}_{i,t} = c_{i,t} - \bar{c}_i$: Time-varying deviation (transitory component)
+* Firm-specific average (persistent component):
+  <div>$$\bar{c}_i = \frac{1}{T_i} \sum_t c_{i,t}$$</div>
+* Time-varying deviation (transitory component):
+  <div>$$\text{dev}_{i,t} = c_{i,t} - \bar{c}_i$$</div>
 
 #### Economic Interpretation
 
@@ -569,13 +570,14 @@ devs.columns = ['dev_' + c for c in devs.columns]
 
 **Statistical Properties:**
 
-1. **Orthogonality:** By construction, $E[\text{dev}_{i,t}] = 0$ for each firm $i$
+1. **Orthogonality:** By construction, for each firm $i$:
+   <div>$$E[\text{dev}_{i,t}] = 0$$</div>
 
 2. **Variance Decomposition:**
-
-$$\text{Var}(c_{i,t}) = \text{Var}(\bar{c}_i) + \text{Var}(\text{dev}_{i,t}) + 2 \cdot \text{Cov}(\bar{c}_i, \text{dev}_{i,t})$$
-
-where $\text{Cov}(\bar{c}_i, \text{dev}_{i,t}) = 0$
+   <div>$$\text{Var}(c_{i,t}) = \text{Var}(\bar{c}_i) + \text{Var}(\text{dev}_{i,t}) + 2 \cdot \text{Cov}(\bar{c}_i, \text{dev}_{i,t})$$</div>
+   
+   where:
+   <div>$$\text{Cov}(\bar{c}_i, \text{dev}_{i,t}) = 0$$</div>
 
 3. **Information Content:**
    - Mean: Cross-sectional variation (firm fixed effects)
@@ -584,7 +586,6 @@ where $\text{Cov}(\bar{c}_i, \text{dev}_{i,t}) = 0$
 #### Out-of-Sample Modification
 
 **Expanding Window Means:**
-
 ```python
 # EXPANDING mean (changes each period)
 char_mean = (
@@ -596,8 +597,12 @@ char_mean = (
 
 **Critical Difference:**
 
-- **In-Sample:** $\bar{c}_i = \frac{1}{T} \sum_{s=1}^{T} c_{i,s}$ (Uses ALL periods including future)
-- **Out-of-Sample:** $\bar{c}_{i,t} = \frac{1}{t} \sum_{s=1}^{t} c_{i,s}$ (Uses ONLY past periods)
+* **In-Sample:** (Uses ALL periods including future)
+  <div>$$\bar{c}_i = \frac{1}{T} \sum_{s=1}^{T} c_{i,s}$$</div>
+
+* **Out-of-Sample:** (Uses ONLY past periods)
+  <div>$$\bar{c}_{i,t} = \frac{1}{t} \sum_{s=1}^{t} c_{i,s}$$</div>
+
 
 **Why Different?**
 
@@ -1148,8 +1153,10 @@ $$R^2_{\text{pred}} = 1 - \frac{\sum_i (\bar{r}_i - \hat{\mu}_i)^2}{\sum_i \bar{
 
 Where:
 
-- $\bar{r}_i = \frac{1}{T_i} \sum_t r_{i,t+1}$: Average return for stock $i$
-- $\hat{\mu}_i = \frac{1}{T_i} \sum_t z'_{i,t} \hat{\Gamma} \hat{\lambda}$: Predicted mean return
+* Average return for stock $i$:
+  <div>$$\bar{r}_i = \frac{1}{T_i} \sum_t r_{i,t+1}$$</div>
+* Predicted mean return:
+  <div>$$\hat{\mu}_i = \frac{1}{T_i} \sum_t z_{i,t}^\top \hat{\Gamma} \hat{\lambda}$$</div>
 - And risk premium: $\hat{\lambda} = \frac{1}{T} \sum_t \hat{f}_t$ (time-series average of factors)
 
 **Implementation:**
@@ -1847,16 +1854,28 @@ def expanding_window_predictions(df, char_cols, K,
 
 For stock $i$ at time $t$, using data from $\tau=1$ to $t$:
 
-1. Rank characteristic: $c^{\text{rank}}_{i,t}$
-2. Expanding mean: $\bar{c}_{i,t} = \frac{1}{t} \sum_{\tau=1}^{t} c^{\text{rank}}_{i,\tau}$
-3. Deviation: $\text{dev}_{i,t} = c^{\text{rank}}_{i,t} - \bar{c}_{i,t}$
+1. Rank characteristic:
+   <div>$$c^{\text{rank}}_{i,t}$$</div>
+
+2. Expanding mean:
+   <div>$$\bar{c}_{i,t} = \frac{1}{t} \sum_{\tau=1}^{t} c^{\text{rank}}_{i,\tau}$$</div>
+
+3. Deviation:
+   <div>$$\text{dev}_{i,t} = c^{\text{rank}}_{i,t} - \bar{c}_{i,t}$$</div>
+
 4. Rank both mean and deviation cross-sectionally
 
 **Test Instruments (Period $t+1$):**
 
-1. Rank characteristic: $c^{\text{rank}}_{i,t+1}$
-2. Update mean: $\bar{c}_{i,t+1} = \frac{t}{t+1}\bar{c}_{i,t} + \frac{1}{t+1}c^{\text{rank}}_{i,t+1}$
-3. Deviation: $\text{dev}_{i,t+1} = c^{\text{rank}}_{i,t+1} - \bar{c}_{i,t+1}$
+1. Rank characteristic:
+   <div>$$c^{\text{rank}}_{i,t+1}$$</div>
+
+2. Update mean:
+   <div>$$\bar{c}_{i,t+1} = \frac{t}{t+1}\bar{c}_{i,t} + \frac{1}{t+1}c^{\text{rank}}_{i,t+1}$$</div>
+
+3. Deviation:
+   <div>$$\text{dev}_{i,t+1} = c^{\text{rank}}_{i,t+1} - \bar{c}_{i,t+1}$$</div>
+
 4. Rank both cross-sectionally at $t+1$
 
 **Implementation:**
